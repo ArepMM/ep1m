@@ -18,6 +18,21 @@ public:
 
 private:
 
+     /// Имя модуля сцепного устройства
+     QString coupling_module_name;
+     /// Имя конфига сцепного устройства
+     QString coupling_config_name;
+
+     /// Сцепка спереди
+     Coupling *coupling_fwd;
+     /// Сцепка сзади
+     Coupling *coupling_bwd;
+
+     /// Расцепной рычаг спереди
+     OperatingRod *oper_rod_fwd;
+     /// Расцепной рычаг сзади
+     OperatingRod *oper_rod_bwd;
+
     /// Панель тумблеров
     EP1MTumblersPanel   *tumblers_panel;
 
@@ -333,6 +348,9 @@ private:
 
     void initialization() override;
 
+    /// Инициализация сцепных устройств
+    void initCouplings(QString modules_dir);
+
     /// Инициализация подсистемы питания цепей управления
     void initControlPower();
 
@@ -381,6 +399,11 @@ private:
     /// Инициализация регистратора параметров движения
     void initRegistartor();
 
+    void step(double t, double dt) override;
+
+    /// Моделирование сцепных устройств
+    void stepCouplings(double t, double dt);
+
     void stepControlPower(double t, double dt);
 
     void stepControlCircuit(double t, double dt);
@@ -426,8 +449,6 @@ private:
 
     /// Отладочная печать по F1
     void stepDebugPrint(double t, double dt);
-
-    void step(double t, double dt) override;
 
     void keyProcess() override;
 

@@ -6,6 +6,12 @@
 //
 //------------------------------------------------------------------------------
 EP1m::EP1m(QObject *parent) : Vehicle (parent)
+  , coupling_module_name("sa3")
+  , coupling_config_name("sa3")
+  , coupling_fwd(nullptr)
+  , coupling_bwd(nullptr)
+  , oper_rod_fwd(nullptr)
+  , oper_rod_bwd(nullptr)
   , tumblers_panel(Q_NULLPTR)
   , msud(Q_NULLPTR)
   , Ucc(0.0)
@@ -51,6 +57,9 @@ void EP1m::initialization()
 {
     FileSystem &fs = FileSystem::getInstance();
     QString modules_dir(fs.getModulesDir().c_str());
+
+    // Инициализация сцепных устройств
+    initCouplings(modules_dir);
 
     // Инициализация питания цепей управления
     initControlPower();
@@ -107,6 +116,9 @@ void EP1m::initialization()
 //------------------------------------------------------------------------------
 void EP1m::step(double t, double dt)
 {
+    // Моделирование сцепных устройств
+    stepCouplings(t, dt);
+
     // Работа подсистемы питания цепей управления
     stepControlPower(t, dt);
 
