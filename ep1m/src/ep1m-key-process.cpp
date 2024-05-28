@@ -34,7 +34,7 @@ void EP1m::keyProcess()
     }
 
     // Включение блока сигнализации
-    if (getKeyState(KEY_8))
+    if (getKeyState(KEY_8) && !isAlt())
     {
         if (isShift())
             tumblers[TUMBLER_BS_002].set();
@@ -49,10 +49,29 @@ void EP1m::keyProcess()
         tumblers[BUTTON_RB].reset();
 
     // РБС
-    if (getKeyState(KEY_Z))
+    /*if (getKeyState(KEY_Z))
         tumblers[BUTTON_RBS].set();
     else
-        tumblers[BUTTON_RBS].reset();
+        tumblers[BUTTON_RBS].reset();*/
+
+    bool is_cp_ready = static_cast<bool>(control_signals.analogSignal[FB_READY].cur_value);
+
+    bool is_cp_RBS = static_cast<bool>(control_signals.analogSignal[FB_RBS].cur_value);
+
+    if (!is_cp_ready)
+    {
+        if (getKeyState(KEY_Z))
+            tumblers[BUTTON_RBS].set();
+        else
+            tumblers[BUTTON_RBS].reset();
+    }
+    else
+    {
+        if (is_cp_RBS)
+            tumblers[BUTTON_RBS].set();
+        else
+            tumblers[BUTTON_RBS].reset();
+    }
 
     // ЭПК
     if (getKeyState(KEY_N))
@@ -64,7 +83,7 @@ void EP1m::keyProcess()
     }
 
     // Выбор МПК
-    if (getKeyState(KEY_1))
+    if (getKeyState(KEY_1) && !isAlt())
     {
         if (isShift())
             tumblers[TUMBLER_MPK].set();
@@ -82,7 +101,7 @@ void EP1m::keyProcess()
     }
 
     // Отключение ПЧФ
-    if (getKeyState(KEY_2))
+    if (getKeyState(KEY_2) && !isAlt())
     {
         if (isShift())
             tumblers[TUMBLER_PCHF].set();
@@ -97,7 +116,7 @@ void EP1m::keyProcess()
         tumblers[BRAKE_RELEASE_BUTTON].reset();
 
     // Перекрытие заднего концевого крана
-    if (getKeyState(KEY_0))
+    if (getKeyState(KEY_0) && !isAlt())
     {
         if (isShift())
             anglecock_bp_bwd->open();
@@ -106,7 +125,7 @@ void EP1m::keyProcess()
     }
 
     // Перекрытие переднего концевого крана
-    if (getKeyState(KEY_9))
+    if (getKeyState(KEY_9) && !isAlt())
     {
         if (isShift())
             anglecock_bp_fwd->open();

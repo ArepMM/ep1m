@@ -137,7 +137,7 @@ void EP1MTumblersPanel::stepKeysControl(double t, double dt)
         }
 
         // Включение мотор-компрессора
-        if (getKeyState(KEY_4))
+        if (getKeyState(KEY_4) && !isAlt())
         {
             if (isShift())
                 tumblers[TUMBLER_COMPRESSOR].set();
@@ -146,7 +146,7 @@ void EP1MTumblersPanel::stepKeysControl(double t, double dt)
         }
 
         // Вентилятор 1
-        if (getKeyState(KEY_5))
+        if (getKeyState(KEY_5) && !isAlt())
         {
             if (isShift())
                 tumblers[TUMBLER_MOTOR_FAN1].set();
@@ -155,7 +155,7 @@ void EP1MTumblersPanel::stepKeysControl(double t, double dt)
         }
 
         // Вентилятор 2
-        if (getKeyState(KEY_6))
+        if (getKeyState(KEY_6) && !isAlt())
         {
             if (isShift())
                 tumblers[TUMBLER_MOTOR_FAN2].set();
@@ -164,7 +164,7 @@ void EP1MTumblersPanel::stepKeysControl(double t, double dt)
         }
 
         // Вентилятор 3
-        if (getKeyState(KEY_7))
+        if (getKeyState(KEY_7) && !isAlt())
         {
             if (isShift())
                 tumblers[TUMBLER_MOTOR_FAN3].set();
