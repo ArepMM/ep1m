@@ -43,31 +43,24 @@ void EP1m::keyProcess()
     }
 
     // РБ
-    if (getKeyState(KEY_M))
+    if (getKeyState(KEY_Z))
         tumblers[BUTTON_RB].set();
     else
-        tumblers[BUTTON_RB].reset();
+        tumblers[BUTTON_RB].reset();    
 
-    // РБС
-    /*if (getKeyState(KEY_Z))
-        tumblers[BUTTON_RBS].set();
-    else
-        tumblers[BUTTON_RBS].reset();*/
-
-    bool is_cp_ready = static_cast<bool>(control_signals.analogSignal[FB_READY].cur_value);
-
-    bool is_cp_RBS = static_cast<bool>(control_signals.analogSignal[FB_RBS].cur_value);
-
-    if (!is_cp_ready)
+    // Если активна РБС на внешнем пульте
+    if (control_signals.analogSignal[CS_RBS].is_active)
     {
-        if (getKeyState(KEY_Z))
+        // реагируем на состояние РБС на внешнем пульте
+        if (static_cast<bool>(control_signals.analogSignal[CS_RBS].cur_value))
             tumblers[BUTTON_RBS].set();
         else
             tumblers[BUTTON_RBS].reset();
     }
-    else
+    else // иначе
     {
-        if (is_cp_RBS)
+        // обрабатываем клавиши
+        if (getKeyState(KEY_M))
             tumblers[BUTTON_RBS].set();
         else
             tumblers[BUTTON_RBS].reset();
