@@ -11,12 +11,12 @@ DEFINES += MSUD_DISPLAY_LIBRARY
 
 CONFIG += c++11
 
-DESTDIR = $$(RRS_DEV_ROOT)/modules/ep1m
+DESTDIR = ../../modules/ep1m
 
 LIBS += -L$$(RRS_DEV_ROOT)/bin -ldisplay
 
-LIBS += -lgcov
-CONFIG += force_debug_info
+#LIBS += -lgcov
+#CONFIG += force_debug_info
 
 INCLUDEPATH += ./include
 INCLUDEPATH += $$(RRS_DEV_ROOT)/sdk/include

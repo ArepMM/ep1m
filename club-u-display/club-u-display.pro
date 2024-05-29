@@ -8,7 +8,7 @@ QT += xml
 
 TARGET = club-u-display
 
-DESTDIR = $$(RRS_DEV_ROOT)/modules/ep1m
+DESTDIR = ../../modules/ep1m
 
 LIBS += -L$$(RRS_DEV_ROOT)/bin -ldisplay
 LIBS += -L$$(RRS_DEV_ROOT)/bin -lCfgReader

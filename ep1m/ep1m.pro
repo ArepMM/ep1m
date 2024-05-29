@@ -7,7 +7,7 @@ QT += xml
 # Имя итогового файла DLL и путь, куда он должен быть помещен после
 # сборки
 TARGET = ep1m
-DESTDIR = $$(RRS_DEV_ROOT)/modules/$$join(TARGET,,,)
+DESTDIR = ../../modules/$$join(TARGET,,,)
 
 # Библиотеки симулятора, с которыми компонуется DLL локомотива
 LIBS += -L$$(RRS_DEV_ROOT)/bin -lCfgReader
