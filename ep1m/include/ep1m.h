@@ -399,6 +399,13 @@ private:
     /// Инициализация регистратора параметров движения
     void initRegistartor();
 
+    /// Предварительные расчёты перед симуляцией
+    void preStep(double t) override;
+
+    /// Предварительный расчёт координат сцепных устройств
+    void preStepCouplings(double t);
+
+    /// Шаг симуляции всех систем электровоза
     void step(double t, double dt) override;
 
     /// Моделирование сцепных устройств

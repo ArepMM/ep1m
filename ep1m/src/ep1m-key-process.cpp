@@ -107,22 +107,4 @@ void EP1m::keyProcess()
         tumblers[BRAKE_RELEASE_BUTTON].set();
     else
         tumblers[BRAKE_RELEASE_BUTTON].reset();
-
-    // Перекрытие заднего концевого крана
-    if (getKeyState(KEY_0) && !isAlt())
-    {
-        if (isShift())
-            anglecock_bp_bwd->open();
-        else
-            anglecock_bp_bwd->close();
-    }
-
-    // Перекрытие переднего концевого крана
-    if (getKeyState(KEY_9) && !isAlt())
-    {
-        if (isShift())
-            anglecock_bp_fwd->open();
-        else
-            anglecock_bp_fwd->close();
-    }
 }
