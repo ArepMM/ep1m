@@ -65,11 +65,11 @@ void EP1m::stepPowerCircuit(double t, double dt)
 
         trac_motor[i]->setFieldVoltage(Uf * static_cast<double>(k1->getContactState(0)));
 
-        // Выдаем момент на тяговые оси
-        Q_a[i + 1] = trac_motor[i]->getTorque() * ip;
-
         // Моделируем работу ТЭД
         trac_motor[i]->step(t, dt);
+
+        // Выдаем момент на тяговые оси
+        Q_a[i + 1] = trac_motor[i]->getTorque() * ip;
 
         fast_switch[i]->setControlVoltage(Ucc);
         fast_switch[i]->step(t, dt);

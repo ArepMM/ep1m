@@ -27,16 +27,16 @@ void EP1m::stepDebugPrint(double t, double dt)
 
     QString traction_reg = "";
     if (tumblers[TUMBLER_AUTO_MODE].getState())
-        traction_reg = QString("V:off|I:%1 /%3 A")
-                .arg(msud_input.Ia[TRAC_MOTOR1], 6, 'f', 0)
-                .arg((km->getTracLevel() - km->getBrakeLevel()) * 1600.0, 6, 'f', 0);
+        traction_reg = QString("V:off|field%1%|I:%2 A")
+                .arg(km->getRefSpeedLevel() * 100.0, 3, 'f', 0)
+                .arg(trac_motor[TRAC_MOTOR1]->getAncorCurrent(), 6, 'f', 0);
     else
         traction_reg = QString("V:%1 /%2 |I:%3 A")
                 .arg(velocity * Physics::kmh, 4, 'f', 0)
-                .arg(km->getRefSpeedLevel() * 160.0, 4, 'f', 0)
-                .arg(msud_input.Ia[TRAC_MOTOR1], 6, 'f', 0);
+                .arg(km->getRefSpeedLevel() * 140.0, 4, 'f', 0)
+                .arg(trac_motor[TRAC_MOTOR1]->getAncorCurrent(), 6, 'f', 0);
 
-    DebugMsg += traction_reg;    
+    DebugMsg += traction_reg;
 
     DebugMsg += QString("          ");
 }
