@@ -1,11 +1,11 @@
-#include    "filesystem.h"
-
 #include    "ep1m.h"
+
+#include    <QDir>
 
 //------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------
-void EP1m::initBrakesEquipment(QString modules_dir)
+void EP1m::initBrakesEquipment(const QString &modules_dir, const QString &custom_cfg_dir)
 {
     // Тормозная магистраль
     double volume_bp = length * 0.0343 * 0.0343 * Physics::PI / 4.0;
@@ -26,20 +26,17 @@ void EP1m::initBrakesEquipment(QString modules_dir)
 
     // Тормозные рычажные передачи
     brake_mech[TROLLEY_FWD] = new BrakeMech(NUM_AXIS_PER_TROLLEY);
-    brake_mech[TROLLEY_FWD]->read_custom_config(
-                config_dir + QDir::separator() + "brake-mech-fwd");
+    brake_mech[TROLLEY_FWD]->read_config("brake-mech-fwd", custom_cfg_dir);
     brake_mech[TROLLEY_FWD]->setWheelRadius(rk[0]);
     brake_mech[TROLLEY_FWD]->setEffFricRadius(rk[0]);
 
     brake_mech[TROLLEY_MID] = new BrakeMech(NUM_AXIS_PER_TROLLEY);
-    brake_mech[TROLLEY_MID]->read_custom_config(
-                config_dir + QDir::separator() + "brake-mech-mid");
+    brake_mech[TROLLEY_MID]->read_config("brake-mech-mid", custom_cfg_dir);
     brake_mech[TROLLEY_MID]->setWheelRadius(rk[NUM_AXIS_PER_TROLLEY]);
     brake_mech[TROLLEY_MID]->setEffFricRadius(rk[NUM_AXIS_PER_TROLLEY]);
 
     brake_mech[TROLLEY_BWD] = new BrakeMech(NUM_AXIS_PER_TROLLEY);
-    brake_mech[TROLLEY_BWD]->read_custom_config(
-                config_dir + QDir::separator() + "brake-mech-bwd");
+    brake_mech[TROLLEY_BWD]->read_config("brake-mech-bwd", custom_cfg_dir);
     brake_mech[TROLLEY_BWD]->setWheelRadius(rk[2 * NUM_AXIS_PER_TROLLEY]);
     brake_mech[TROLLEY_BWD]->setEffFricRadius(rk[2 * NUM_AXIS_PER_TROLLEY]);
 

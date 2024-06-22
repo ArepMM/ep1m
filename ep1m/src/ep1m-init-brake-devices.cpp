@@ -1,6 +1,6 @@
 #include    "ep1m.h"
 
-#include    <QDir>
+#include    "filesystem.h"
 
 //------------------------------------------------------------------------
 //
@@ -34,7 +34,10 @@ void EP1m::initBrakeDevices(double p0, double pBP, double pFL)
 
     supply_reservoir->setY(0, pBP);
 
-    load_brakes_config(config_dir + QDir::separator() + "brakes-init.xml");
+    FileSystem &fs = FileSystem::getInstance();
+    QString custom_cfg_dir(fs.getVehiclesDir().c_str());
+    custom_cfg_dir += QDir::separator() + config_dir;
+    load_brakes_config(custom_cfg_dir + QDir::separator() + "brakes-init.xml");
 
     // Состояние рукавов и концевых кранов питательной магистрали
     if (hose_fl_fwd->isLinked())

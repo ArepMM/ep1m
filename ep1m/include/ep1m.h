@@ -113,7 +113,7 @@ private:
     bool is_N211_on;
 
     /// Регистрировать параметры движения
-    bool is_Registarator_on;
+    bool is_Registrator_on;
 
     /// Сигнал на проводе Н45
     bool is_N45_on;
@@ -349,46 +349,46 @@ private:
     void initialization() override;
 
     /// Инициализация сцепных устройств
-    void initCouplings(QString modules_dir);
+    void initCouplings(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация подсистемы питания цепей управления
-    void initControlPower();
+    void initControlPower(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация цепей управления
-    void initControlCircuit();
+    void initControlCircuit(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация АЗВ
-    void initAZV();
+    void initAZV(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация пульта управления в кабине
-    void initPanel();
+    void initPanel(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация МСУД
-    void initMSUD();
+    void initMSUD(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация силовой схемы
-    void initPowerCircuit();
+    void initPowerCircuit(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация питательной магистрали
-    void initPneumoSupply(QString modules_dir);
+    void initPneumoSupply(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация приборов управления тормозами
-    void initBrakesControl(QString modules_dir);
+    void initBrakesControl(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация тормозного оборудования
-    void initBrakesEquipment(QString modules_dir);
+    void initBrakesEquipment(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация ЭПТ
-    void initEPB(QString modules_dir);
+    void initEPB(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация вспомогательных машин
-    void initAuxMachines();
+    void initAuxMachines(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация устройств безопасности
-    void initSafetyDevices();
+    void initSafetyDevices(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация прочих устройств
-    void initOtherEquipment();
+    void initOtherEquipment(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Инициализация озвучки
     void initSounds();
@@ -397,7 +397,7 @@ private:
     void initTapSounds();
 
     /// Инициализация регистратора параметров движения
-    void initRegistartor();
+    void initRegistartor(const QString &modules_dir, const QString &custom_cfg_dir);
 
     /// Предварительные расчёты перед симуляцией
     void preStep(double t) override;

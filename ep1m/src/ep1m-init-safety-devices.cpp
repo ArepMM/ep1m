@@ -1,14 +1,23 @@
 #include    "ep1m.h"
 
-#include    <QDir>
+#include    "filesystem.h"
 
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::initSafetyDevices()
+void EP1m::initSafetyDevices(const QString &modules_dir, const QString &custom_cfg_dir)
 {
+    (void) modules_dir;
+    (void) custom_cfg_dir;
+
     klub_BEL = new KLUB();
     klub_BEL->setMaxVelocity(140.0);
+    klub_BEL->setDirection(dir * orient);
+    klub_BEL->setTrainLength(length);
+
+    FileSystem &fs = FileSystem::getInstance();
+    QString route_path = fs.getRouteRootDir().c_str();
+    route_path += QDir::separator() + route_dir;
 
     // Загрузка электронной карты в КЛУБ
     QString speeds_name = "speeds";
@@ -18,16 +27,10 @@ void EP1m::initSafetyDevices()
     else
         speeds_name += "2";
 
-    QString path = QDir::toNativeSeparators(route_dir) +
-            QDir::separator() + speeds_name + ".conf";
-
+    QString path = route_path + QDir::separator() + speeds_name + ".conf";
     klub_BEL->loadSpeedsMap(path);
-    klub_BEL->setDirection(dir * orient);
-    klub_BEL->setTrainLength(length);
 
     // Загрузка станций в КЛУБ
-    path = QDir::toNativeSeparators(route_dir) +
-            QDir::separator() + "stations.conf";
-
+    path = route_path + QDir::separator() + "stations.conf";
     klub_BEL->loadStationsMap(path);
 }

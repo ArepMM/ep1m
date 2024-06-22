@@ -1,11 +1,11 @@
-#include    "filesystem.h"
-
 #include    "ep1m.h"
+
+#include    <QDir>
 
 //------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------
-void EP1m::initBrakesControl(QString modules_dir)
+void EP1m::initBrakesControl(const QString &modules_dir, const QString &custom_cfg_dir)
 {
     // Блокировочное устройство
     brake_lock = new BrakeLock();
@@ -17,7 +17,7 @@ void EP1m::initBrakesControl(QString modules_dir)
 
     // Кран вспомогательного тормоза
     loco_crane = loadLocoCrane(modules_dir + QDir::separator() + "kvt254");
-    loco_crane->read_custom_config(config_dir + QDir::separator() + "kvt215");
+    loco_crane->read_config("kvt215", custom_cfg_dir);
 
     // ЭПК
     epk = loadAutoTrainStop(modules_dir + QDir::separator() + "epk150");
@@ -25,7 +25,7 @@ void EP1m::initBrakesControl(QString modules_dir)
 
     // Повторительное пневмореле для давления от воздухораспределителя РД4
     rd4 = new PneumoRelay();
-    rd4->read_custom_config(config_dir + QDir::separator() + "rd4");
+    rd4->read_config("rd4", custom_cfg_dir);
 
     // Переключательный клапан КП1
     kp1 = new SwitchingValve();
@@ -35,14 +35,13 @@ void EP1m::initBrakesControl(QString modules_dir)
     kp2->read_config("zpk");
     // Переключательный клапан КП5
     kp5 = new SwitchingValve();
-    kp5->read_custom_config(config_dir + QDir::separator() + "kp5");
+    kp5->read_config("kp5", custom_cfg_dir);
 
     // Пневмопанель
     pneumo_red_panel = new PneumoReducerPanel();
     pneumo_red_panel->setCustomConfigDir(config_dir);
-    pneumo_red_panel->read_custom_config(config_dir +
-                                         QDir::separator() +
-                                         "pneumo-reducer-panel");
+    pneumo_red_panel->read_config("pneumo-reducer-panel", custom_cfg_dir);
+
     // Тройники
     bc_splitter[0] = new PneumoSplitter();
     bc_splitter[0]->read_config("pneumo-splitter");

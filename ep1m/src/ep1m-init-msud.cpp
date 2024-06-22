@@ -5,9 +5,11 @@
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::initMSUD()
+void EP1m::initMSUD(const QString &modules_dir, const QString &custom_cfg_dir)
 {
+    (void) modules_dir;
+
     msud = new MSUD();
-    msud->read_custom_config(config_dir + QDir::separator() +  "msud");
+    msud->read_config("msud", custom_cfg_dir);
     msud->init();
 }

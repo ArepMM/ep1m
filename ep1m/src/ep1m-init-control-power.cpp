@@ -5,17 +5,19 @@
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::initControlPower()
+void EP1m::initControlPower(const QString &modules_dir, const QString &custom_cfg_dir)
 {
+    (void) modules_dir;
+
     battery = new Battery();
-    battery->read_custom_config(config_dir + QDir::separator() + "battery");
+    battery->read_config("battery", custom_cfg_dir);
 
     power_supply = new PowerSupply();    
 
     tumblers[BUTTON_MAIN_SWITCH_OFF].set();
 
     km5 = new Relay(1);
-    km5->read_custom_config(config_dir + QDir::separator() + "mk-69");
+    km5->read_config("mk-69", custom_cfg_dir);
     km5->setSoundName("KM5_On");
     km5->setInitContactState(0, false);
 }

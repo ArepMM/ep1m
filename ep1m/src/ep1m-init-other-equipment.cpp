@@ -3,7 +3,10 @@
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
-void EP1m::initOtherEquipment()
+void EP1m::initOtherEquipment(const QString &modules_dir, const QString &custom_cfg_dir)
 {
+    (void) modules_dir;
+    (void) custom_cfg_dir;
+
     horn = new TrainHorn();
 }

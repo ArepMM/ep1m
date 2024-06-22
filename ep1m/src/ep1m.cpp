@@ -32,7 +32,7 @@ EP1m::EP1m(QObject *parent) : Vehicle (parent)
   , ip(1.0)
   , is_H36(false)
   , is_N211_on(false)
-  , is_Registarator_on(false)
+  , is_Registrator_on(false)
   , is_N45_on(false)
   , is_N53_on(false)
   , main_res_leak(1e-6)
@@ -56,49 +56,51 @@ EP1m::~EP1m()
 void EP1m::initialization()
 {
     FileSystem &fs = FileSystem::getInstance();
-    QString modules_dir(fs.getModulesDir().c_str());
+    QString modules_dir = QString(fs.getModulesDir().c_str());
+    QString custom_cfg_dir(fs.getVehiclesDir().c_str());
+    custom_cfg_dir += fs.separator() + config_dir;
 
     // Инициализация сцепных устройств
-    initCouplings(modules_dir);
+    initCouplings(modules_dir, custom_cfg_dir);
 
     // Инициализация питания цепей управления
-    initControlPower();
+    initControlPower(modules_dir, custom_cfg_dir);
 
     // Инициализация цепей управления
-    initControlCircuit();
+    initControlCircuit(modules_dir, custom_cfg_dir);
 
     // Инициализация АЗВ
-    initAZV();
+    initAZV(modules_dir, custom_cfg_dir);
 
     // Инициализация пульта управления в кабине
-    initPanel();
+    initPanel(modules_dir, custom_cfg_dir);
 
     // Инициализация микропроцессорной системы управления и диагностики (МСУД)
-    initMSUD();
+    initMSUD(modules_dir, custom_cfg_dir);
 
     // Инициализация силовой схемы
-    initPowerCircuit();
+    initPowerCircuit(modules_dir, custom_cfg_dir);
 
     // Инициализация системы подготовки сжатого воздуха
-    initPneumoSupply(modules_dir);
+    initPneumoSupply(modules_dir, custom_cfg_dir);
 
     // Инициализация приборов управления тормозами
-    initBrakesControl(modules_dir);
+    initBrakesControl(modules_dir, custom_cfg_dir);
 
     // Инициализация приборов торможения
-    initBrakesEquipment(modules_dir);
+    initBrakesEquipment(modules_dir, custom_cfg_dir);
 
     // Инициализация ЭПТ
-    initEPB(modules_dir);
+    initEPB(modules_dir, custom_cfg_dir);
 
     // Инициализация вспомогательных машин
-    initAuxMachines();
+    initAuxMachines(modules_dir, custom_cfg_dir);
 
     // Инициализация приборов безопасности
-    initSafetyDevices();
+    initSafetyDevices(modules_dir, custom_cfg_dir);
 
     // Инициализация прочих устройств
-    initOtherEquipment();
+    initOtherEquipment(modules_dir, custom_cfg_dir);
 
     // Инициализация озвучки
     initSounds();
@@ -107,8 +109,8 @@ void EP1m::initialization()
     initTapSounds();
 
     // Инициализация регистратора
-    if (is_Registarator_on)
-        initRegistartor();
+    if (is_Registrator_on)
+        initRegistartor(modules_dir, custom_cfg_dir);
 }
 
 //------------------------------------------------------------------------------
@@ -173,7 +175,7 @@ void EP1m::step(double t, double dt)
     stepDebugPrint(t, dt);
 
     // Регистрация параметров движения
-    if (is_Registarator_on)
+    if (is_Registrator_on)
         stepRegistration(t, dt);
 }
 
