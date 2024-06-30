@@ -126,7 +126,7 @@ void EP1m::signalsOutput()
     analogSignal[SIGNAL_TUMBLER_SIGNAL_PANEL] = TO_FLOAT(tumblers[TUMBLER_BS_002].getState());
     analogSignal[SIGNAL_TUMBLER_PCHF] = TO_FLOAT(tumblers[TUMBLER_PCHF].getState());
 
-    bool is_MSUD_OB = main_switch->getU_out() >= 10000 && battery->getCargeCurrent() <= 0.0;
+    bool is_MSUD_OB = main_switch->getU_out() >= 10000 && battery->getChargeCurrent() <= 0.0;
     analogSignal[SIGNAL_MSUD_OB] = TO_FLOAT(is_MSUD_OB);
 
     analogSignal[SIGNAL_MSUD_TC] = TO_FLOAT(msud->getOutputData().TC_status);

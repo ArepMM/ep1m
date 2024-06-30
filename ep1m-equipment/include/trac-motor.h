@@ -3,8 +3,6 @@
 
 #include    "device.h"
 
-#include    "motor-magnetic-char.h"
-
 //------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------
@@ -98,9 +96,9 @@ private:
     double  E;
 
     /// Характеристика намагничивания
-    MotorMagneticChar   magnetic_char;
+    LinearInterpolation   magnetic_char;
 
-    MotorMagneticChar   eff_coef;
+    LinearInterpolation   eff_coef;
 
     void preStep(state_vector_t &Y, double t);
 

@@ -103,7 +103,7 @@ void EP1m::initControlCircuit(const QString &modules_dir, const QString &custom_
     kv84->setInitContactState(2, false);
     kv84->setInitContactState(3, false);
 
-    kt10 = new TimeRelay(6, false);
+    kt10 = new TimeRelay(6);
     kt10->read_config("mk-69", custom_cfg_dir);
     kt10->setInitContactState(0, false);
     kt10->setInitContactState(1, false);
@@ -111,11 +111,10 @@ void EP1m::initControlCircuit(const QString &modules_dir, const QString &custom_
     kt10->setInitContactState(3, false);
     kt10->setInitContactState(4, false);
     kt10->setInitContactState(5, false);
-    kt10->setTimeout(1.5);
+    kt10->setTimeoutOff(1.5);
 
     kt1 = new TimeRelay(5);
     kt1->read_config("mk-69", custom_cfg_dir);
-
     // Контакты цепи схемы "Тяга"
     kt1->setInitContactState(0, true);
     kt1->setInitContactState(1, false);
@@ -123,7 +122,7 @@ void EP1m::initControlCircuit(const QString &modules_dir, const QString &custom_
     kt1->setInitContactState(3, false);
     // Контакты цепи схемы "Рекуперация"
     kt1->setInitContactState(4, true);
-    kt1->setTimeout(1.5);
+    kt1->setTimeoutOn(1.5);
 
     km41 = new Relay(5);
     km41->read_config("mk-69", custom_cfg_dir);
@@ -144,13 +143,13 @@ void EP1m::initControlCircuit(const QString &modules_dir, const QString &custom_
     kt4 = new TimeRelay(5);
     kt4->read_config("mk-69", custom_cfg_dir);
     kt4->setInitContactState(0, true);
-    kt4->setTimeout(1.5);
+    kt4->setTimeoutOn(1.5);
 
-    kt5 = new TimeRelay(5, false);
+    kt5 = new TimeRelay(5);
     kt5->read_config("mk-69", custom_cfg_dir);
     kt5->setInitContactState(0, false);
     kt5->setInitContactState(1, false);
-    kt5->setTimeout(2.0);
+    kt5->setTimeoutOff(2.0);
 
     km14 = new Relay(5);
     km14->read_config("mk-69", custom_cfg_dir);

@@ -12,7 +12,7 @@ void EP1m::stepControlCircuit(double t, double dt)
     kv44->step(t, dt);
 
     // Цепь питания промежуточного реле KV39
-    bool is_kv39_on = tumblers_panel->getTumblerState(TUMBLER_PANT1) |
+    bool is_kv39_on = tumblers_panel->getTumblerState(TUMBLER_PANT1) ||
                       tumblers_panel->getTumblerState(TUMBLER_PANT2);
 
     kv39->setVoltage(Ucc * static_cast<double>(is_kv39_on));
@@ -99,8 +99,7 @@ void EP1m::stepTractionControl(double t, double dt)
     kv12->step(t, dt);
 
     // Контроль давления в тормозной магистрали
-    sp4->setInput(brakepipe->getPressure());
-    sp4->step(t, dt);
+    sp4->setValue(brakepipe->getPressure());
 
     // Контакт экстренного торможения на кране машиниста
     bool is_SQ3 =  brake_crane->getPositionName() == "VI";

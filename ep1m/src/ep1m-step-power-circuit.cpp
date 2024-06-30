@@ -114,7 +114,7 @@ void EP1m::stepPowerCircuit(double t, double dt)
     // Сигнал на проводе Н36
     is_H36 = km->isContacts9_10() &&
              epk->getStateKey() &&
-             sp4->getOutput() &&
+             sp4->getState() &&
              kv84->getContactState(0) &&
              kv12->getContactState(0) &&
              kv13->getContactState(0) &&
