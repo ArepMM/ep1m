@@ -51,7 +51,7 @@ void ReverseInd::drawReverse_(int val)
     paint.setRenderHint(QPainter::Antialiasing, true);
 
     //
-    paint.setPen(QPen( QColor(Qt::yellow),
+    paint.setPen(QPen( QColor(Qt::green),
                        9,
                        Qt::SolidLine,
                        Qt::RoundCap ));
